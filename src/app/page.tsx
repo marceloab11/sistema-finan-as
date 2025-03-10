@@ -5,7 +5,7 @@ import { Header } from "./components/Header"
 
 const Page = () => {
   return(
-    <div className="container">
+    <div className="">
       <Header/>
       <Body/>
     </div>
