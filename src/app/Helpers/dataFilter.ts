@@ -26,5 +26,19 @@ export const formatDate = (date:Date): string => {
     let month = date.getMonth();
     let day = date.getDay();
     
-    return `${day}/${month}/${year}`
+    return `${addzero(day)}/${addzero(month)}/${year}`
+}
+
+const addzero = (n: number): string => {
+    if(n < 10){
+        return `0${n}`
+    } else {
+        return `${n}`
+    }
+}
+
+export const FormatYearAndMonth = (date: string) => {
+    let [yaer, month] = date.split("-");
+    const months = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
+    return months[parseInt(month) -1] + " " + yaer
 }
