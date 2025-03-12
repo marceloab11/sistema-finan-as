@@ -1,12 +1,17 @@
 import { futimes } from "fs";
 import { FormatYearAndMonth } from "../Helpers/dataFilter";
+import { useState } from "react";
+import { ResumeItem } from "./ResumeItem";
 
 type Props = {
     CurrentMonth: string;
     onMonthChange: (newMonth:string) => void;
+    income:number,
+    expense:number
 }
 
-export const InfoArea = ({CurrentMonth, onMonthChange}:Props) => {
+export const InfoArea = ({CurrentMonth, onMonthChange, income, expense}:Props) => {
+
     function handlePrevMonth(){
         const [year, month] = CurrentMonth.split("-")
         const CurrentDate = new Date(parseInt(year), parseInt(month) -1, 1)
@@ -41,7 +46,13 @@ export const InfoArea = ({CurrentMonth, onMonthChange}:Props) => {
             </div>
             {/* Resume area */}
             <div className="flex-[2] flex text-black">
-                ....
+                <ResumeItem title="Receitas" value={income}/>
+                <ResumeItem title="Despesas" value={expense}/>
+                <ResumeItem
+                     title="Balanço"
+                     value={income - expense}
+                     color={(income - expense) < 0 ? "#CD1818" : "#000"}
+                />
             </div>
         </div>
     )

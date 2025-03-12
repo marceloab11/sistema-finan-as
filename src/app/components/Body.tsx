@@ -4,13 +4,33 @@ import { FilterListMonth, getcurrentMonth } from "../Helpers/dataFilter";
 import { item } from "../types/items";
 import { TableArea } from "./TableArea";
 import { InfoArea } from "./infoArea";
+import { categorias } from "../data/categories";
 
 export const Body = () => {
     const [list, setList] = useState(items);
-    //lista filtrada pelo ano
+    //lista filtrada pelo mes
     const [listFilter, setListFilter] = useState<item[]>([])
     //pega o mês atual
     const [curentMonth, setCurrentMonth] = useState(getcurrentMonth())
+
+    const [income, setIncome] = useState(0)
+    const [expense, setExpense] = useState(0)
+
+    useEffect(()=>{
+        let incomeCount = 0 
+        let expenseCount = 0
+
+        for(let i in listFilter){
+            if(categorias[listFilter[i].category].expense){
+                expenseCount += listFilter[i].value
+            } else {
+                incomeCount += listFilter[i].value
+            }
+
+            setExpense(expenseCount)
+            setIncome(incomeCount)
+        }
+    },[listFilter])
 
     useEffect(()=>{
          setListFilter( FilterListMonth(list, curentMonth) );
@@ -24,6 +44,8 @@ export const Body = () => {
             <InfoArea
                  CurrentMonth={curentMonth}
                  onMonthChange={handleMonthChage}
+                 income={income}
+                 expense={expense}
                  />
            <TableArea list={listFilter}/>
         </div>
