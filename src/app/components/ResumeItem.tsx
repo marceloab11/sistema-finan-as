@@ -8,7 +8,7 @@ export const ResumeItem = ({title, value, color}:Props) => {
     return(
         <div className="flex-1">
             <div className="text-center font-bold text-[#888] mb-[5px]">{title}</div>
-            <div className="text-center font-bold" style={{ color: color }}>R$ {value}</div>
+            <div className="text-center font-bold" style={{ color: color }}>R$ {value.toFixed(2)}</div>
         </div>
     )
 }

@@ -5,6 +5,7 @@ import { item } from "../types/items";
 import { TableArea } from "./TableArea";
 import { InfoArea } from "./infoArea";
 import { categorias } from "../data/categories";
+import { InsertArea } from "./insertArea";
 
 export const Body = () => {
     const [list, setList] = useState(items);
@@ -39,6 +40,13 @@ export const Body = () => {
     function handleMonthChage(newMonth:string){
         setCurrentMonth(newMonth)
     }
+
+    function handleInsert(item: item){
+        let newList = [...list]
+        newList.push(item)
+        setList(newList)
+    }
+
     return (
         <div className="m-auto max-w-[980px]">
             <InfoArea
@@ -47,6 +55,9 @@ export const Body = () => {
                  income={income}
                  expense={expense}
                  />
+            
+            <InsertArea onClick={handleInsert} />
+
            <TableArea list={listFilter}/>
         </div>
     )
