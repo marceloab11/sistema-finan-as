@@ -24,7 +24,6 @@ export const InsertArea = ({onClick}:Props) => {
                  value: parseFloat(valor)
             }
             onClick(Newitem);
-            console.log("Adicionado...")
             setData("");
             setcategoria("");
             setTitulo("");
